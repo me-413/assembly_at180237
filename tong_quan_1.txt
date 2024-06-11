@@ -116,7 +116,9 @@ CSEG ENDS
 
 END begin
 
-Giải thích
+Giải thích:
+
+
 b. chương trình hợp ngữ dạng .com
 org 100h
 jmp start
@@ -128,6 +130,8 @@ start:  mov     dx, msg
         int     16h 
       
 ret 
+
+Giải thích:
 
 
 
