@@ -1,1 +1,57 @@
+- cấu trúc chương trình .exe và .com
+  .exe
+.model small ; kieu mo hinh bao gom: small/ medium/ ...
+.stack 10h ; kich thuoc bo nho
+.data 
+        ; dinh dang cac bien va hang
+.code 
+        MAIN   Proc
+        ; khoi dau cho DS
+               MOV AX, @data
+               MOV DS, AX
+        ; cac lenh cua chuong trinh chinh
+        ; tro ve DOS
+               MOV AH, 4Ch
+               INT 21h
+        MAIN   Endp
+        ; cac chuong trinh con (neu co)
+End MAIN
+
+   .com
+.model small
+  .code
+          org 100h
+  start   jmp continue
+          ; dinh nghia cho bien va hang
+  continue:
+  main proc
+          ; cac lenh cua chuong trinh chinh
+          int 20h    ; tro ve DOS
+  main endp
+          ; cac chuong trinh con (neu co)
+  end start
+
+
+- hiểu các lệnh: 
+MOV:
+ADD: 
+SUB: 
+INC: 
+DEC:
+AND: 
+OR: 
+
+
+- thực hành
+
+1. Khảo sát lệnh Intelx86
+a. 
+b. 
+c. (optional)
+
+2. Chạy chương trình trên emu8086
+a. 
+
+3. Viết chương trình đơn giản
+
 
