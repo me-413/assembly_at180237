@@ -45,12 +45,91 @@ OR:
 - thực hành
 
 1. Khảo sát lệnh Intelx86
-a. 
+a. Cho lệnh, dự đoán kết quả, thực thi trên emu để kiểm tra kết quả dự đoán
+MOV AH, 80 ; AH ← 80 (AX = ?)
+MOV AL, 86 ; AL ← 86 (AX = ?)
+MOV BX, AX ; BX ← AX (BH = ?, BL = ?)
+MOV DH, BL ; DH ← BL (DH = ?, DX = ?)
+MOV DL, BH ; DL ← BH (DL = ?, DX = ?)
+MOV SI, CS ; SI ← CS (SI = ?)
+Thực hiện từng lệnh, sau mỗi lệnh ghi lại kết quả các thanh ghi trong ngoặc để đối chiếu với kết quả dự đoán trên và giải thích.
+
+Kết quả: 
+Mã code:
+; Chương trình hợp ngữ dạng EXE để thực hiện các lệnh đã cho
+.model small
+.stack 100h
+.data
+.code
+start:
+    ; Đặt giá trị cho các thanh ghi
+    MOV AH, 80h        ; AH ← 80h (AX = 0080h)
+    MOV AL, 86h        ; AL ← 86h (AX = 8086h)
+    MOV BX, AX         ; BX ← AX (BX = 8086h)
+    MOV DH, BL         ; DH ← BL (DH = 86h, DX = xx86h)
+    MOV DL, BH         ; DL ← BH (DL = 80h, DX = 8680h)
+    MOV SI, CS         ; SI ← CS (SI = giá trị của CS)
+
+    ; Kết thúc chương trình
+    MOV AX, 4C00h
+    INT 21h
+end start 
+
+(optional) Thực thi file exe khi có một file asm
+sử dụng Terminal:
+  . masm file.asm   -> chuyển nó thành .obj
+  . link file.obj
+  . file.exe -> thực thi chương trình
+9/0 nếu thực hiện trên emu thì chắc không cần đâu he
+
 b. 
+MOV AX, 8086 ; AX ← 8086 (AH = ?, AL = ?)
+ADD AL, 3 ; AL ← AL + 3 (AL = ?, AX = ?)
+DEC AX ; AX ← AX – 1 (AH = ?, AL = ?, AX = ?)
+SUB AH, 10h ; AH ← AH – 10h (AH = ?, AL = ?, AX = ?)
+AND AX, 0FF0h ; AX ← AX and 0FF0h (AX = ?)
+
+Kết quả:
+Mã code: 
 c. (optional)
+Lặp lại mã code với giá trị khác .-.
 
 2. Chạy chương trình trên emu8086
-a. 
+a. chương trình hợp ngữ dạng .exe
+DSEG SEGMENT         ; Tạo đoạn DSEG
+  chuoi DB "Hello World!$"  ; Khai báo biến chuỗi
+DSEG ENDS
+
+CSEG SEGMENT         ; Tạo đoạn CSEG
+  ASSUME CS:CSEG, DS:DSEG  ; CSEG là đoạn lệnh, DSEG là dữ liệu
+begin:
+  MOV AX, DSEG       ; Khởi động địa chỉ đoạn dữ liệu
+  MOV DS, AX
+  MOV AH, 09h        ; AH ← 09h
+  LEA DX, chuoi      ; DX ← địa chỉ offset biến chuoi
+  INT 21h            ; gọi ngắt 21h
+  MOV AH, 01h        ; AH ← 01h
+  INT 21h            ; gọi ngắt 21h
+  MOV AH, 4Ch        ; Thoát chương trình
+  INT 21h            ; gọi ngắt 21h
+CSEG ENDS
+
+END begin
+
+Giải thích
+b. chương trình hợp ngữ dạng .com
+org 100h
+jmp start
+msg:    db      "Hello, World!", 0Dh,0Ah, 24h
+start:  mov     dx, msg
+        mov     ah, 09h 
+        int     21h        
+        mov     ah, 0 
+        int     16h 
+      
+ret 
+
+
 
 3. Viết chương trình đơn giản
 
