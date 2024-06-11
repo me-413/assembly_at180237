@@ -55,6 +55,32 @@ MOV SI, CS ; SI ← CS (SI = ?)
 Thực hiện từng lệnh, sau mỗi lệnh ghi lại kết quả các thanh ghi trong ngoặc để đối chiếu với kết quả dự đoán trên và giải thích.
 
 Kết quả: 
+// MOV AH, 80 
+-> AH = 50
+    AX = , vì AL chưa bị thay đổi giá trị vẫn là 00h
+    AL = 00h
+// MOV AL, 
+-> AL = 
+   AH = 
+  AX = 
+
+// MOV BX, AX
+-> BX = 
+BH = 
+BL = 
+
+// MOV DH,BL
+-> DH = BL = 
+   DL = 
+   DX = 
+
+// MOV DL, BH
+-> DL = BH = 
+   DX =
+
+//MOV SI, CS
+   SI nhận giá trị của CS, mà giá trị của CS sẽ tùy thuộc vào ngữ cảnh
+
 Mã code:
 ; Chương trình hợp ngữ dạng EXE để thực hiện các lệnh đã cho
 .model small
@@ -90,6 +116,7 @@ SUB AH, 10h ; AH ← AH – 10h (AH = ?, AL = ?, AX = ?)
 AND AX, 0FF0h ; AX ← AX and 0FF0h (AX = ?)
 
 Kết quả:
+
 Mã code: 
 c. (optional)
 Lặp lại mã code với giá trị khác .-.
@@ -136,5 +163,25 @@ Giải thích:
 
 
 3. Viết chương trình đơn giản
+a. 
+.model small
+.stack 100h
+.data
+    operand1_a db 15h
+    operand2_a db 250 
+    result_a dw ?
+
+.code 
+    main proc
+    mov ax, byte [operand1_a]
+    mov bx, byte [operand1_b]
+    imul ax, bx
+    mov [result_a], ax
+
+    mov ah, 4ch
+    int 21h
+    main endp
+end main
+
 
 
