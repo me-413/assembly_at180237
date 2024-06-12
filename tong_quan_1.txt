@@ -164,6 +164,8 @@ Giải thích:
 
 3. Viết chương trình đơn giản
 a. 
+
+; chatGPT dạy
 .model small
 .stack 100h
 .data
@@ -173,8 +175,10 @@ a.
 
 .code 
     main proc
-    mov ax, byte [operand1_a]
-    mov bx, byte [operand1_b]
+    mov ax, @data  ; nạp địa chỉ của đoạn dữ liệu
+    mov ds, ax     ; ds trỏ đến đoạn dữ liệu
+    mov ax, byte ptr [operand1_a]
+    mov bx, byte ptr [operand1_b]
     imul ax, bx
     mov [result_a], ax
 
@@ -182,6 +186,37 @@ a.
     int 21h
     main endp
 end main
+
+
+// đầu tiên nó còn dạy khác cơ
+// hình như là cú pháp của .exe mới như có model/ stack/ data/ code
+// còn bth là khác segment jj đó
+// viết .exe
+.mode small
+.stack 100h
+.data 
+    operand1_a db 15h
+    operand2_a db 250 
+    ; họ có yêu cầu đáp án phải để trong biến không nhỉ result_a dw ?
+.code 
+    main proc
+    mov ax, @data
+    mov ds, ax
+    mov ax, operand1_a
+    mov bx, operand1_a
+    imul ax, bx
+    ; mov result_a, ax
+
+    mov ah, 4Ch
+    int 21h
+    main endp
+end main
+
+// để xóa bộ nhớ thành ghi dùng xor
+
+
+
+        
 
 
 
