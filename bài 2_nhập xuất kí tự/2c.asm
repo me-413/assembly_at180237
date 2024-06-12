@@ -20,7 +20,8 @@ lea dx, tbao  ; dx <- dia chi offset cua bien tbao   (?) bat buoc phai la dx kho
 int 21h        ; goi ngat de thuc hien ham
 
 mov ah, 01h  ; ham 1, cho user an phim bat ky
-int 21h  
+int 21h   
+; ki tu nhap vao duoc luu trong al
 
 mov ah, 4Ch  ; tro ve he dieu hanh
 int 21h
