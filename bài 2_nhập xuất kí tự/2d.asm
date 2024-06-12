@@ -1,7 +1,7 @@
 dseg segment
 max db 30
 len db 0
-chuoi db 30, 0, 30 dup(?)
+chuoi db 30 dup(?)
 tbao db 'Hay nhap vao tu ban phim chuoi ky tu... $'
 dseg ends
 
