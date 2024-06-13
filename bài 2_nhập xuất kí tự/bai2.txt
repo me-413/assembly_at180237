@@ -9,3 +9,24 @@
     có các tham số: max = buffer[0], len = buffer[1], chuoi = buffer[2] -> buffer[n+1]
     
 - Bảng mã ASCII. 
+
+
+
+
+- 2a
+Câu lệnh để in ký tự 'B'
+  mov ah, 02h
+  mov ax, 'B'
+  int 21h
+
+Hai dòng lệnh
+mov ah, 08h
+int 21h 
+để làm j
+
+
+Các giá trị 13 và 10 đại diện cho các mã ký tự điều khiển của ASCII:
+
+13 (CR - Carriage Return): Đưa con trỏ về đầu dòng.
+10 (LF - Line Feed): Di chuyển con trỏ xuống dòng tiếp theo.
+
