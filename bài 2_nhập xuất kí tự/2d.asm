@@ -17,7 +17,7 @@ lea dx, tbao
 int 21h
 
 mov ah, 0Ah
-lea dx, chuoi
+lea dx, max  ; dia chi bat dau chuoi
 int 21h
 
 mov ah, 4Ch
