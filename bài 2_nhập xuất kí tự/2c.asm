@@ -7,7 +7,6 @@ dseg ends
 
 cseg segment
 assume cs:cseg, ds:dseg ; cseg la doan lenh, dseg la doan du lieu
-cseg ends
 
 ; dong assume .. -> thong bao cho assembler thanh ghi cs tro den cseg, ds tro den dseg -> thiet lap ngu canh
 
